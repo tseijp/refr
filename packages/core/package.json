@@ -2,7 +2,7 @@
   "name": "refr",
   "author": "tseijp",
   "license": "MIT",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "module": "index.js",
   "types": "index.ts",
   "main": "index.cjs.js",
@@ -26,11 +26,12 @@
     "typescript"
   ],
   "files": [
-    "index.ts",
     "index.js",
     "index.d.ts",
     "index.cjs.js",
     "index.develop.js",
-    "index.product.js"
+    "index.product.js",
+    "types.ts",
+    "index.ts"
   ]
 }
