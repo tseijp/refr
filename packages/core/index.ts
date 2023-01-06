@@ -1,4 +1,6 @@
-import type { Fun, Queue, Frame } from '@refr/types'
+import type { Fun, Queue, Frame } from './types'
+
+export * from './types'
 
 export default frame
 

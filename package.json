@@ -7,7 +7,7 @@
   "private": true,
   "sideEffects": false,
   "scripts": {
-    "publish": "yarn rollup && cd packages/core && yarn publish",
+    "pub": "yarn rollup && cd packages/core && yarn publish",
     "rollup": "cd packages/core && npx rollup -c ../../rollup.config.ts --configPlugin typescript --bundleConfigAsCjs",
     "ls": "cd packages/core && npm publish --dry-run",
     "start": "cd examples/docs && yarn start",
