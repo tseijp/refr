@@ -1,37 +1,92 @@
 {
-  "name": "refr",
-  "author": "tseijp",
-  "license": "MIT",
-  "version": "0.2.0",
-  "module": "index.js",
-  "types": "index.ts",
-  "main": "index.cjs.js",
-  "umd": "index.develop.js",
-  "private": false,
-  "sideEffect": false,
-  "publishConfig": {
-    "access": "public"
-  },
-  "keywords": [
-    "animation",
-    "frame",
-    "hooks",
-    "raf",
-    "react",
-    "reactjs",
-    "reactive",
-    "requestAnimationFrameanimation",
-    "solid",
-    "tiny",
-    "typescript"
-  ],
-  "files": [
-    "index.js",
-    "index.d.ts",
-    "index.cjs.js",
-    "index.develop.js",
-    "index.product.js",
-    "types.ts",
-    "index.ts"
-  ]
+        "name": "refr",
+        "version": "0.4.0",
+        "author": "tseijp",
+        "license": "MIT",
+        "private": false,
+        "sideEffect": false,
+        "publishConfig": {
+                "access": "public"
+        },
+        "bugs": {
+                "url": "https://github.com/tseijp/refr/issues"
+        },
+        "repository": "tseijp/refr",
+        "homepage": "https://refr.tsei.jp",
+        "keywords": [
+                "animation",
+                "frame",
+                "hooks",
+                "raf",
+                "react",
+                "reactjs",
+                "reactive",
+                "requestAnimationFrameanimation",
+                "solid",
+                "tiny",
+                "typescript"
+        ],
+        "files": [
+                "dist/**/*.{js,ts,mjs,mts,map}",
+                "packages.json",
+                "README.md"
+        ],
+        "main": "./dist/index.js",
+        "types": "./dist/index.d.mts",
+        "module": "./dist/index.mjs",
+        "exports": {
+                "./packages.json": "./packages.json",
+                ".": {
+                        "types": "./dist/index.d.mts",
+                        "import": {
+                                "types": "./dist/index.d.mts",
+                                "default": "./dist/index.mjs"
+                        },
+                        "module": {
+                                "types": "./dist/index.d.mts",
+                                "default": "./dist/index.mjs"
+                        },
+                        "require": "./dist/index.js",
+                        "default": "./dist/index.js"
+                },
+                "./*": {
+                        "types": "./dist/index.d.mts",
+                        "import": {
+                                "types": "./dist/index.d.mts",
+                                "default": "./dist/index.mjs"
+                        },
+                        "module": {
+                                "types": "./dist/index.d.mts",
+                                "default": "./dist/index.mjs"
+                        },
+                        "require": "./dist/index.js",
+                        "default": "./dist/index.js"
+                },
+                "./react": {
+                        "types": "./dist/react.d.mts",
+                        "import": {
+                                "types": "./dist/react.d.mts",
+                                "default": "./dist/react.mjs"
+                        },
+                        "module": {
+                                "types": "./dist/react.d.mts",
+                                "default": "./dist/react.mjs"
+                        },
+                        "require": "./dist/react.js",
+                        "default": "./dist/react.js"
+                },
+                "./react/*": {
+                        "types": "./dist/react.d.mts",
+                        "import": {
+                                "types": "./dist/react.d.mts",
+                                "default": "./dist/react.mjs"
+                        },
+                        "module": {
+                                "types": "./dist/react.d.mts",
+                                "default": "./dist/react.mjs"
+                        },
+                        "require": "./dist/react.js",
+                        "default": "./dist/react.js"
+                }
+        }
 }

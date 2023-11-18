@@ -34,13 +34,25 @@ yarn add refr
 import frame from 'refr'
 
 // Schedule an update
-frame.mount(dt => {})
+frame.mount((dt) => {})
 
 // Start an update loop
-frame.mount(dt => true)
+frame.mount((dt) => true)
 
 // Cancel an update
 frame.cancel(fn)
+
+// Start the update loop
+frame.start()
+
+// Pause the update loop
+frame.pause()
+
+// Stop the update loop
+frame.stop()
+
+// Restart the update loop
+frame.restart()
 
 // Set a timeout that runs on nearest frame
 frame.setTimeout(() => {}, 1000)
@@ -55,13 +67,14 @@ frame.now() // => number
 import { useRef } from 'react'
 import { useFrame } from 'refr'
 
-function TrailSphere () {
-  const ref = useRef()
-  useFrame((dt) => {
-    ref.current.position.x = Math.sin(dt)
-    ref.current.position.y = Math.cos(dt)
-  })
-  return <Sphere ref={ref} />
+function TrailSphere() {
+        const ref = useRef()
+
+        // Schedule an update
+        useFrame((ts) => {})
+
+        // Start an update loop
+        useFrame((ts) => true)
 }
 ```
 

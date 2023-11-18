@@ -1,10 +1,5 @@
 ### my created
-**/*.js
-**/*.cjs
-**/*.mjs
-**/*.esm.js
-**/*.develop.js
-**/*.product.js
+dist
 examples
 packages/*
 !packages/core
