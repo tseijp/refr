@@ -14,8 +14,8 @@ export const createQueue = (): Queue => {
         let current = next
         const self = ((fun: Fun) => {
                 if (current.has(fun)) {
-                        self.mount(fun)
-                } else self.clean(fun)
+                        next.delete(fun)
+                } else next.add(fun)
         }) as unknown as Queue
         self.mount = (fun) => next.add(fun)
         self.clean = (fun) => next.delete(fun)
