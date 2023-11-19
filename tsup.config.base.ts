@@ -3,27 +3,23 @@ import type { Options } from 'tsup'
 /**
  * ref: https://github.com/pmndrs/react-spring/blob/main/tsup.config.base.ts
  */
-
 interface BuildTarget {
         format: 'cjs' | 'esm'
-        name: string
         dts?: object
 }
 
 const BUILD_TARGETS: BuildTarget[] = [
         {
                 format: 'cjs',
-                name: 'index.cjs',
-        },
-        {
-                format: 'esm',
-                name: 'index.min',
                 // https://github.com/egoist/tsup/issues/618
                 dts: {
                         compilerOptions: {
                                 moduleResolution: 'node',
                         },
                 },
+        },
+        {
+                format: 'esm',
         },
 ]
 
