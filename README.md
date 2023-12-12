@@ -16,17 +16,68 @@ It's just a single function that you can call from anywhere. It's a hook that wi
 
 You can also use it to set timeouts that will run on the next frame. This is useful when you want to force an update after a state change.
 
+---
+
 ## Installation
 
 ```ruby
-npm i refr
+npm install refr
 ```
 
-or
+---
 
-```ruby
-yarn add refr
-```
+<table>
+<td width="1000px" valign="top">
+
+## Documentation
+
+###### [Docs][docs] : refr Introduction
+
+###### [API][api] : refr API and feature
+
+###### [Guide][guide] : refr Getting Started
+
+[docs]: https://refr.tsei.jp/docs
+[api]: https://refr.tsei.jp/api
+[guide]: https://refr.tsei.jp/guide
+
+</td>
+<td width="1000px" valign="top">
+
+## Ecosystem
+
+###### 🌇 [glre][glre]: GLSL Reactive Engine
+
+###### ⛪️ [reev][reev]: reactive event state manager
+
+[glre]: https://github.com/tseijp/refr
+[refr]: https://github.com/tseijp/refr
+
+</td>
+<td width="1000px" valign="top">
+
+## Staying informed
+
+###### [github discussions][github] welcome✨
+
+###### [@tseijp][twitter] twitter
+
+###### [tsei.jp][articles] articles
+
+[github]: https://github.com/tseijp/refr/discussions
+[twitter]: https://twitter.com/tseijp
+[articles]: https://tsei.jp/articles
+
+</td>
+</table>
+
+---
+
+## PRs
+
+###### welcome✨
+
+---
 
 ## API
 
