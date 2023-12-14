@@ -54,7 +54,7 @@ export const createFrame = <T extends Fun = Fun>() => {
         self.start = () => void (ts < 0 && raf(loop))
         self.pause = () => void (ts > -1 && (ts = -2)) // -2 means paused
         self.reset = () => void ([prev, current] = [current, createQueue()])
-        self.stop = () => void (self.reset(), self.pause())
+        self.stop = () => void (self.pause(), self.reset())
         self.restart = () => void ((current = prev), self.start())
 
         let ms = -1

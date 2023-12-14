@@ -7,7 +7,7 @@ import type * as Preset from '@docusaurus/preset-classic'
 
 const config: Config = {
         title: 'refr',
-        tagline: '🌃 request animation frame',
+        tagline: 'request animation frame',
         favicon: 'img/favicon.ico',
         url: 'https://refr.tsei.jp',
         baseUrl: '/',
@@ -35,10 +35,10 @@ const config: Config = {
         themeConfig: {
                 image: 'img/social-card.jpg',
                 navbar: {
-                        title: 'My Site',
+                        title: 'refr',
                         logo: {
-                                alt: 'refr',
-                                src: 'img/logo.svg',
+                                alt: ' ',
+                                src: 'img/logo.png',
                         },
                         items: [
                                 {

@@ -1,4 +1,4 @@
-# 🌃refr
+# 🔮refr
 
 [![npm](https://img.shields.io/npm/v/refr.svg)](https://www.npmjs.com/package/refr)
 [![npm](https://img.shields.io/npm/dm/refr.svg)](https://www.npmjs.com/package/refr)
@@ -51,7 +51,7 @@ npm install refr
 ###### ⛪️ [reev][reev]: reactive event state manager
 
 [glre]: https://github.com/tseijp/refr
-[refr]: https://github.com/tseijp/refr
+[reev]: https://github.com/tseijp/reev
 
 </td>
 <td width="1000px" valign="top">

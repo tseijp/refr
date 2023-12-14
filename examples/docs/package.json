@@ -22,7 +22,9 @@
                 "prism-react-renderer": "^2.3.0",
                 "react": "^18.0.0",
                 "react-dom": "^18.0.0",
-                "glre": "0.19.0"
+                "glre": "0.19.0",
+                "gsap": "3.12.3",
+                "rege": "0.2.0"
         },
         "devDependencies": {
                 "@docusaurus/module-type-aliases": "3.0.1",
