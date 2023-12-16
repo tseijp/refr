@@ -1,16 +1,23 @@
-import React, { useEffect, useLayoutEffect, useMemo } from 'react'
+import React, { useMemo, useEffect } from 'react'
 import { useDrag, useWheel } from 'rege/react'
 import { gsap } from 'gsap'
 import { useColorMode, useWindowSize } from '@docusaurus/theme-common'
 import Head from '@docusaurus/Head'
 import Layout from '@theme/Layout'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
-// import { createGL } from '../../../../packages/glre/packages/core'
-// import { useGL } from '../../../../packages/glre/packages/core/react'
-import { useGL } from 'glre/react'
+// import { createGL } from '../../../../tmp/glre/packages/core'
+// import { useGL, useTexture } from '../../../../tmp/glre/packages/core/react'
+import { createGL } from 'glre/core'
+import { useGL, useUniform, useTexture } from 'glre/react'
 
 const frag = /* ts */ `
 precision highp float;
+
+uniform float iTime;
+uniform float imageSize;
+uniform vec2 iResolution;
+uniform mat4 Matrix;
+uniform sampler2D TEXTURE;
 
 /**
  * utils from lygia
@@ -86,9 +93,6 @@ mat2 rot(float a) {
 
 #define opTwist(SDF, pos, k) (SDF(vec3(rot(pos.y * exp(abs(k))) * pos.xz, pos.y)) )
 
-uniform vec2 iResolution;
-uniform float iTime;
-
 float U_sphere_impl(vec3 pos) {
         float k = 20.0;
         float t = sin(iTime / 10.0) * 10.0;
@@ -110,7 +114,6 @@ float U_sphere(vec3 pos) {
         return opTwist(U_sphere_impl, pos, pos.y);
 }
 
-uniform mat4 Matrix;
 
 float map(vec3 pos) {
         pos = (Matrix * vec4(pos, 1.0)).xyz;
@@ -126,27 +129,60 @@ vec3 normal(vec3 pos, float d) {
         ));
 }
 
-vec3 star(vec3 p, vec3 n) {
-        vec3 dir = normalize(vec3(p + n));
-        vec3 v = vec3(0.0);
-        for (int r = 0; r < 10; r++) {
-                p = vec3(1.0) + dir;
-                float a = 0.0;
-                for (int i = 0; i < 13; i++) {
-                        p = abs(p) / dot(p, p) - 0.5;
-                        a += length(p);
-                }
-                v += a * a * a * a;
-        }
-        return v * 0.00000001;
+vec3 refr(vec3 p, vec3 n) {
+        p.y *= -1.0;
+        float aspect = iResolution.x / iResolution.y;
+        // adjust UV
+        vec2 uv = p.xy;
+        uv /= aspect;
+        uv /= 0.7;
+        uv += 0.5;
+
+        // refract
+        uv += vec2(n.x, -n.y) * 0.015;
+
+        // return vec3(uv, 0.0);
+
+        vec4 textureColor = texture2D(TEXTURE, uv);
+        textureColor.rgb += n * 0.11;
+        return textureColor.rgb * textureColor.a;
 }
 
-vec3 material(vec3 pos, vec3 nor) {
+vec3 refr_impl(vec3 p, vec3 n) {
         vec3 light = vec3(.5);
-        vec3 col = star(pos, nor);
-        col *= dot(nor, light) * 10.0;
+        vec3 col = refr(p, n);
+        return col;
+}
+
+vec3 refl(vec3 p, vec3 n) {
+        vec3 dir = normalize(vec3(p + n * 0.3));
+        vec3 v = vec3(0.0);
+        p = vec3(1.0) + dir;
+        float a = 0.0;
+        for (int i = 0; i < 14; i++) {
+                p = abs(p) / dot(p, p) - 0.5;
+                a += length(p);
+        }
+        v += a * a * a * a;
+        return v * 0.00000014;
+}
+
+vec3 refl_impl(vec3 p, vec3 n) {
+        vec3 light = vec3(.5);
+        vec3 col = refl(p, n);
+        col *= dot(n, light) * 10.0;
         col *= exp(length(col) * 10.0);
         return col;
+}
+
+vec3 material(vec3 p, vec3 n) {
+        vec3 light = vec3(.5);
+        float rate = dot(n, n) * 0.45;
+        vec3 l = refl_impl(p, n);
+        vec3 r = refr_impl(p, n);
+        vec3 c = mix(l, r, rate);
+        c = log(c * 5.0);
+        return c;
 }
 
 void main() {
@@ -207,7 +243,7 @@ export const mat4 = (
 }
 
 const Canvas = () => {
-        // const gl = useMemo(() => createGL(), [])
+        const gl = useMemo(() => createGL(), [])
 
         const drag = useDrag(({ delta: [, dy], isDragging }) => {
                 if (!isDragging) return
@@ -242,10 +278,13 @@ const Canvas = () => {
         const ref = (el: Element) => {
                 drag.ref(el)
                 scroll.ref(el)
+                if (!el) return
         }
 
-        const gl = useGL({ render, frag, ref })
-        // useGL({ render, frag, ref }, gl)
+        // const gl = useGL({ render, frag, ref })
+        useGL({ render, frag, ref }, gl)
+        useUniform({ imageSize: 1 }, gl)
+        useTexture({ TEXTURE: '/img/texture.png' }, gl)
 
         return (
                 <canvas
@@ -299,10 +338,7 @@ const Effects = () => {
         const { colorMode } = useColorMode()
         const windowSize = useWindowSize()
         useEffect(() => moved(windowSize), [windowSize])
-        useLayoutEffect(
-                () => styled(colorMode, windowSize),
-                [colorMode, windowSize]
-        )
+        useEffect(() => styled(colorMode, windowSize), [colorMode, windowSize])
         return null
 }
 
@@ -316,10 +352,10 @@ const Home = () => {
                                         {siteConfig.titleDelimiter}{' '}
                                         {siteConfig.tagline}
                                 </title>
-                                <style>
-                                        @import
-                                        url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-                                </style>
+                                <link
+                                        href="https://fonts.googleapis.com/css2?family=Stick&display=swap"
+                                        rel="stylesheet"
+                                />
                         </Head>
                         <Canvas />
                         <Effects />
