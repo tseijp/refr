@@ -1,7 +1,7 @@
 # 🔮refr
 
 <p align="center">
-<a href="https://refr.tsei.jp" target=”_blank” rel="noopener noreferrer">
+<a href="https://refr.tsei.jp">
   <img alt=" " src="https://refr.tsei.jp/img/REFR.gif"></img>
 </a>
 </p>
