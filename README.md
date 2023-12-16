@@ -4,7 +4,7 @@
 <a href="https://refr.tsei.jp" target=”_blank” rel="noopener noreferrer">
   <img alt=" " src="https://refr.tsei.jp/img/REFR.gif"></img>
 </a>
-</p>p>
+</p>
 
 [![npm](https://img.shields.io/npm/v/refr.svg)](https://www.npmjs.com/package/refr)
 [![npm](https://img.shields.io/npm/dm/refr.svg)](https://www.npmjs.com/package/refr)
