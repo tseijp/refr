@@ -1,6 +1,8 @@
 import { frame } from '.'
 import { useRef, useEffect } from 'react'
-import { Fun, Frame } from './types'
+import { Fun, Queue, Frame } from './types'
+
+export { Fun, Queue, Frame }
 
 export const useCall = <F extends Function>(callback: F) => {
         const ref = useRef<Fun>((...args: unknown[]) =>

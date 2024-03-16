@@ -1,5 +1,7 @@
 import { Fun, Queue, Frame } from './types'
 
+export { Fun, Queue, Frame }
+
 export const safely = (fun: Fun, ...args: unknown[]) => {
         try {
                 return fun(...args)
